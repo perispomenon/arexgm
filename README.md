@@ -1,1 +1,1 @@
-# arexgm
+# Arythmetic Exercises Game
