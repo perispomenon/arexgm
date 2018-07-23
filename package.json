@@ -1,8 +1,9 @@
 {
   "name": "arexgm",
   "version": "1.0.0",
-  "description": "Arythmetic Exercises Game",
   "scripts": {},
+  "devDependencies": {
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/totoaskeo/arexgm.git"
@@ -12,10 +13,11 @@
     "game",
     "simple"
   ],
-  "author": "totoaskeo",
+  "description": "Arythmetic Exercises Game",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/totoaskeo/arexgm/issues"
   },
-  "homepage": "https://github.com/totoaskeo/arexgm#readme"
+  "homepage": "https://github.com/totoaskeo/arexgm#readme",
+  "author": "totoaskeo"
 }

@@ -1,7 +1,9 @@
 <template>
-<div id="game-board">
-  <label>Длина раунда</label>
-  <input type="number">
+<div id="game-board" class="container">
+  <div class="form-group">
+    <label>Длина раунда</label>
+    <input type="number" class="form-control">
+  </div>
 </div>
 </template>
 
@@ -20,7 +22,5 @@ export default {
 
 <style lang="stylus" scoped>
 #game-board
-  background #456789
-  width 80%
-  margin 0 auto
+  background #d9d9d9
 </style>

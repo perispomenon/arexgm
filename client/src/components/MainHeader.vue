@@ -3,7 +3,6 @@
   <header>
     <h2>AREXGM</h2>
     <nav>
-
     </nav>
   </header>
 </div>
