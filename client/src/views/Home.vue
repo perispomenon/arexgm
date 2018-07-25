@@ -1,6 +1,5 @@
 <template>
 <div class="home">
-  <main-header></main-header>
   <game-board></game-board>
 </div>
 </template>

@@ -1,9 +1,5 @@
 <template>
 <div id="game-board" class="container">
-  <div class="form-group">
-    <label>Длина раунда</label>
-    <input type="number" class="form-control">
-  </div>
 </div>
 </template>
 
@@ -15,7 +11,7 @@ export default {
       exercises: []
     }
   },
-  create () {
+  mounted () {
   }
 }
 </script>
