@@ -1,9 +1,9 @@
 <template>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <h5 class="modal-title">Log in</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,12 +11,12 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label class="col-form-label">Recipient:</label>
+            <label class="col-form-label">Login:</label>
             <input type="text" class="form-control">
           </div>
           <div class="form-group">
-            <label class="col-form-label">Message:</label>
-            <textarea class="form-control"></textarea>
+            <label class="col-form-label">Password:</label>
+            <input type="password" class="form-control">
           </div>
         </form>
       </div>

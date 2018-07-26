@@ -8,10 +8,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <router-link class="nav-link" :to="{ name: 'home' }">About</router-link>
+          <router-link class="nav-link" :to="{ name: 'about' }">About</router-link>
         </ul>
         <ul class="navbar-nav ml-auto">
           <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link>
+          <li class="nav-item"  @click="showLogin = true" :data-toggle="showLogin ? 'modal' : ''" data-target="#loginModal">
+            <a class="nav-link" href="javascript:void(0)">Log in</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -27,6 +30,11 @@ export default {
   name: 'main-header',
   components: {
     Login
+  },
+  data () {
+    return {
+      showLogin: false
+    }
   }
 }
 </script>
