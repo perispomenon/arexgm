@@ -11,6 +11,7 @@
 
 <script>
 import Exercise from '@/components/Exercise'
+import moment from 'moment'
 
 export default {
   name: 'game-board',
@@ -28,14 +29,20 @@ export default {
     startGame () {
       this.gameStarted = true
       this.$refs.exercise.generateNext()
+      const gameStartTime = moment()
+      const gameEndTime = gameStartTime.clone().add(this.roundLength, 'minutes')
+      setTimeout(this.endGame, gameEndTime.diff(gameStartTime))
     },
     answerChecked (isCorrect) {
       if (isCorrect) {
         this.exercises.push(this.$refs.exercise.generateNext())
       } else {
-        // do smth
+        // todo handle incorrect like show something to user
       }
       console.log(this.exercises)
+    },
+    endGame () {
+      console.log('123123123123')
     }
   },
   mounted () {

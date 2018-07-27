@@ -1,11 +1,12 @@
 <template>
 <div class="exercise">
   <div class="exercise-itself">
-    {{firstOperand + ' ' + operation + ' ' + secondOperand}}
+    {{ firstOperand + ' ' + operation + ' ' + secondOperand }}
   </div>
   <form class="its-answer form-group" @submit.prevent> <!-- form, cuz div with single input is @submitunpreventable -->
     <input type="number" class="form-control" autofocus v-model="userAnswer" @keyup.enter.native="checkAnswer">
-    <button class="btn btn-primary" @click="checkAnswer">Check</button>
+    <!-- idk, without @click on this button @keyup above doesn't work. let it just stay hidden -->
+    <button v-show="false" class="btn btn-primary" @click="checkAnswer">Check</button>
   </form>
 </div>
 </template>
@@ -32,7 +33,21 @@ export default {
       this.operation = this.getNextOperation()
       this.firstOperand = this.getNextInt()
       this.secondOperand = this.getNextInt()
-      this.answer = this.firstOperand + this.secondOperand
+      switch (this.operation) {
+        case '+':
+          this.answer = this.firstOperand + this.secondOperand
+          break
+        case '-':
+          this.answer = this.firstOperand - this.secondOperand
+          break
+        case '/':
+          this.answer = this.firstOperand
+          this.firstOperand = this.firstOperand * this.secondOperand
+          break
+        case '*':
+          this.answer = this.firstOperand * this.secondOperand
+          break
+      }
 
       return prevEx
     },
@@ -55,6 +70,7 @@ export default {
 
   .exercise-itself
     margin auto
+    font-size 20px
 
   .its-answer
     margin 0 auto 0

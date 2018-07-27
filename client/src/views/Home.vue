@@ -5,13 +5,11 @@
 </template>
 
 <script>
-import MainHeader from '@/components/MainHeader'
 import GameBoard from '@/components/GameBoard'
 
 export default {
   name: 'home',
   components: {
-    MainHeader,
     GameBoard
   }
 }
