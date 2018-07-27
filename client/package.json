@@ -25,5 +25,6 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.5.16"
-  }
+  },
+  "proxy": "localhost:8080"
 }
