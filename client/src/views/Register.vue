@@ -4,30 +4,44 @@
   <form>
     <div class="form-group">
       <label>Login</label>
-      <input type="text" class="form-control" aria-describedby="loginHelp" placeholder="Enter login">
+      <input v-model="login" type="text" class="form-control" placeholder="Enter login">
       <small class="form-text text-muted">Validation here</small>
     </div>
     <div class="form-group">
       <label>Email</label>
-      <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+      <input v-model="email" type="email" class="form-control" placeholder="Enter email">
       <small class="form-text text-muted">Validation here</small>
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input type="password" class="form-control" placeholder="Password">
+      <input v-model="password" type="password" class="form-control" placeholder="Password">
     </div>
     <div class="form-group">
       <label>Confirm password</label>
-      <input type="password" class="form-control" placeholder="Confirm password">
+      <input v-model="confirmPassword" type="password" class="form-control" placeholder="Confirm password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" @click="register">Submit</button>
   </form>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'register'
+  name: 'register',
+  data () {
+    return {
+      login: null,
+      email: null,
+      password: null,
+      confirmPassword: null
+    }
+  },
+  methods: {
+    async register () {
+      const rsp = await this.$store.dispatch('registerUser', this.$data)
+      console.log(rsp)
+    }
+  }
 }
 </script>
 
