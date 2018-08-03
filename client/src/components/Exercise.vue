@@ -1,6 +1,6 @@
 <template>
 <div class="exercise">
-  <div class="exercise-itself">
+  <div class="exercise-itself" ref="exerciseItself">
     {{ firstOperand + ' ' + operation + ' ' + secondOperand }}
   </div>
   <form class="its-answer form-group" @submit.prevent> <!-- form, cuz div with single input is @submitunpreventable -->
@@ -38,6 +38,7 @@ export default {
           this.answer = this.firstOperand + this.secondOperand
           break
         case '-':
+          this.firstOperand = this.firstOperand > this.secondOperand ? this.firstOperand : this.secondOperand
           this.answer = this.firstOperand - this.secondOperand
           break
         case '/':
@@ -52,6 +53,9 @@ export default {
       return prevEx
     },
     checkAnswer () {
+      if (!this.userAnswer && this.userAnswer !== 0) {
+        return
+      }
       this.$emit('answerChecked', Number(this.userAnswer) === this.answer)
       this.userAnswer = null
     }
