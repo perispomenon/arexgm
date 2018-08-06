@@ -38,7 +38,8 @@ export default {
   },
   methods: {
     async register () {
-      const rsp = await this.$store.dispatch('registerUser', this.$data)
+      const rsp = await this.$store.dispatch('register', this.$data)
+      console.log(rsp)
     }
   }
 }

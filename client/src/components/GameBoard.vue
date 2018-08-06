@@ -56,15 +56,17 @@ export default {
       this.showVerdict = true
       // TODO maybe do animation on the verdict
       if (isCorrect) {
+        // TODO add problem solving time to this array
         this.exercises.push(this.$refs.exercise.generateNext())
       }
       console.log(this.exercises)
     },
-    endGame () {
+    async endGame () {
       this.gameEnded = true
       this.gameTimeProgress = 0
       clearInterval(this.gameTimeInterval)
-      // TODO send this exercises to db for statistics
+      const rsp = await this.$store.dispatch('storeStats', this.exercises)
+      console.log(rsp)
     }
   },
   mounted () {}
