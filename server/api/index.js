@@ -1,14 +1,22 @@
 const Router = require('express').Router()
+const User = require('../db/models/User')
+const State = require('../db/models/Stat')
 
-  // TODO do smth
-Router.post('user/register', (req, res) => {
+  // TODO add validation and stuff smth
+Router.post('user/register', async (req, res) => {
   console.log(req.body)
-  res.end()
+  const user = new User({
+    login: req.body.login,
+    password: req.body.password,
+    email: req.body.email
+  })
+  await user.save()
+  res.json({ result: 1 })
 })
 
 Router.post('user/login', (req, res) => {
   console.log(req.body)
-  res.json({ result: 1 })
+  res.end()
 })
 
 Router.get('user/:id', (req, res) => {
