@@ -12,7 +12,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link>
-          <li class="nav-item"  @click="showLogin = true" :data-toggle="showLogin ? 'modal' : ''" data-target="#loginModal">
+          <li class="nav-item" :data-toggle="'modal'" data-target="#loginModal">
             <a class="nav-link" href="javascript:void(0)">Log in</a>
           </li>
         </ul>
@@ -33,7 +33,6 @@ export default {
   },
   data () {
     return {
-      showLogin: false
     }
   }
 }

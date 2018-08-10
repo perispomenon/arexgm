@@ -74,9 +74,14 @@ export default {
 
   .exercise-itself
     margin auto
-    font-size 20px
+    font-size 50px
 
   .its-answer
     margin 0 auto 0
     display flex
+
+    input
+      height 60px
+      width 200px
+      font-size 30px
 </style>

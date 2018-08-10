@@ -2,10 +2,10 @@
 <div>
   <div id="gb-bg">
     <div id="game-board" class="container">
-      <div id="verdict" ref="verdict" :class="[isAnswerCorrect ? 'purple' : 'bluish', 'animated']" v-show="showVerdict">
+      <div id="verdict" ref="verdict" :class="[isAnswerCorrect ? 'purple' : 'bluish', 'animated']" v-show="showVerdict && gameStarted">
         {{ (isAnswerCorrect ? 'Correct' : 'Incorrect') + '!' }}
       </div>
-      <div class="form-group" v-show="!gameStarted && !gameEnded">
+      <div class="form-group" v-show="!gameStarted">
         <label>Round length (minutes)?</label>
         <input type="number" class="form-control" v-model="roundLength">
       </div>
@@ -33,7 +33,6 @@ export default {
       exercises: [],
       roundLength: 2, // TODO get from db
       gameStarted: false,
-      gameEnded: false,
       gameTimeProgress: 0,
       gameTimeInterval: null,
       isAnswerCorrect: null,
@@ -62,7 +61,8 @@ export default {
       console.log(this.exercises)
     },
     async endGame () {
-      this.gameEnded = true
+      this.gameStarted = false
+      this.showVerdict = false
       this.gameTimeProgress = 0
       clearInterval(this.gameTimeInterval)
       const rsp = await this.$store.dispatch('storeStats', this.exercises)
@@ -75,10 +75,10 @@ export default {
 
 <style lang="stylus" scoped>
 #verdict
-  font-size 1.6em
+  font-size 40px
 
 #game-board
-  background #bec3d3
+  background #c4b6a4
   height 500px
   display flex
   justify-content center
