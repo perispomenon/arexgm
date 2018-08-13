@@ -3,14 +3,15 @@ const User = require('../db/models/User')
 const State = require('../db/models/Stat')
 
   // TODO add validation and stuff smth
-Router.post('user/register', async (req, res) => {
+Router.post('/user/register', async (req, res) => {
   console.log(req.body)
-  const user = new User({
-    login: req.body.login,
-    password: req.body.password,
-    email: req.body.email
-  })
-  await user.save()
+  // TODO fix db
+  // const user = new User({
+  //   login: req.body.login,
+  //   password: req.body.password,
+  //   email: req.body.email
+  // })
+  // await user.save()
   res.json({ result: 1 })
 })
 
