@@ -1,9 +1,12 @@
 {
   "name": "arexgm",
   "version": "1.0.0",
-  "scripts": {},
-  "devDependencies": {
+  "scripts": {
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "client": "cd client && yarn serve",
+    "server": "cd server && yarn start"
   },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/totoaskeo/arexgm.git"
@@ -19,5 +22,8 @@
     "url": "https://github.com/totoaskeo/arexgm/issues"
   },
   "homepage": "https://github.com/totoaskeo/arexgm#readme",
-  "author": "totoaskeo"
+  "author": "totoaskeo",
+  "dependencies": {
+    "concurrently": "^3.6.1"
+  }
 }
