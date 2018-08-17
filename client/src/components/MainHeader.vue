@@ -10,10 +10,16 @@
         <ul class="navbar-nav">
           <router-link class="nav-link" :to="{ name: 'about' }">About</router-link>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto" v-if="!user">
           <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link>
           <li class="nav-item" :data-toggle="'modal'" data-target="#loginModal">
             <a class="nav-link" href="javascript:void(0)">Log in</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" v-else>
+          <router-link class="nav-link" :to="{ name: 'profile' }">Profile</router-link>
+          <li class="nav-item" :data-toggle="'modal'">
+            <a class="nav-link" href="javascript:void(0)" @click.prevent="logOut">Log out</a>
           </li>
         </ul>
       </div>
@@ -25,6 +31,7 @@
 
 <script>
 import Login from '@/components/Login'
+import { mapState } from 'vuex'
 
 export default {
   name: 'main-header',
@@ -33,6 +40,14 @@ export default {
   },
   data () {
     return {
+    }
+  },
+  computed: mapState({
+    user: state => state.user
+  }),
+  methods: {
+    async logOut () {
+      await this.$store.dispatch('logOut')
     }
   }
 }

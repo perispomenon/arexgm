@@ -1,14 +1,14 @@
 const Router = require('express').Router()
 const User = require('../db/models/User')
-const State = require('../db/models/Stat')
+const Stat = require('../db/models/Stat')
 const passport = require('passport')
 
-function authenticationMiddleware () {
+function checkAuth () {
   return function (req, res, next) {
-      if (req.isAuthenticated()) {
-          return next()
-      }
-      res.redirect('/')
+    if (req.isAuthenticated()) {
+      return next()
+    }
+    res.end(403)
   }
 }
 
@@ -37,7 +37,16 @@ Router.post('/user/login', (req, res, next) => {
   })(req, res, next)
 })
 
-Router.get('/user/:id', (req, res) => {
+Router.post('/user/logout', (req, res, next) => {
+  req.session.destroy(err => {
+    if (err) {
+      next(err)
+    }
+    res.end()
+  })
+})
+
+Router.get('/user/:id', checkAuth, (req, res) => {
   console.log(req.body)
   res.end()
 })
@@ -47,7 +56,7 @@ Router.put('/exercises', (req, res) => {
   res.end()
 })
 
-Router.get('/exercises/:id', (req, res) => {
+Router.get('/exercises', (req, res) => {
   console.log(req.body)
   res.end()
 })

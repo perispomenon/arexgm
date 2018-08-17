@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "client": "cd client && yarn serve",
-    "server": "cd server && yarn start"
+    "server": "cd server && yarn start",
+    "watch": "cd server && yarn watch"
   },
   "devDependencies": {},
   "repository": {

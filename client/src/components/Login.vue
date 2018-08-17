@@ -21,7 +21,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ref="close">Close</button>
         <button type="button" class="btn btn-primary" @click="tryLogin">Log in</button>
       </div>
     </div>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'login',
   data () {
@@ -38,10 +40,17 @@ export default {
       password: null
     }
   },
+  computed: mapState({
+    user: state => state.user
+  }),
   methods: {
     async tryLogin () {
-      const rsp = await this.$store.dispatch('login', this.$data)
-      console.log(rsp)
+      await this.$store.dispatch('login', this.$data)
+      if (!this.user.login) {
+        this.errMsg = this.user.message
+      } else {
+        this.$refs.close.click()
+      }
     }
   }
 }

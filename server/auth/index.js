@@ -8,7 +8,6 @@ passport.use(new LocalStrategy({ usernameField: 'login' }, (login, password, don
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' })
       }
-      console.log(user.password, password)
       if (user.password !== password) {
         return done(null, false, { message: 'Incorrect password.' })
       }
