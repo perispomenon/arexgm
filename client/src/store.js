@@ -33,7 +33,8 @@ export default new Vuex.Store({
       const { data } = await axios.post('/api/user/login', input)
       commit(LOGIN, {
         login: data.login,
-        email: data.email
+        email: data.email,
+        id: data._id
       })
     },
     async logOut ({ commit, state }) {

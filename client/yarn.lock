@@ -6812,6 +6812,10 @@ vue-eslint-parser@^2.0.3:
     esquery "^1.0.0"
     lodash "^4.17.4"
 
+vue-flash-message@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/vue-flash-message/-/vue-flash-message-0.6.2.tgz#0b690463bceb8140837e5deefd1381435ca2111a"
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"

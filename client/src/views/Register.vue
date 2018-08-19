@@ -13,6 +13,10 @@
       <small class="form-text text-muted" v-show="emailValidationMsg">{{ emailValidationMsg }}</small>
     </div>
     <div class="form-group">
+      <label>City</label>
+      <input v-model="city" type="text" class="form-control" placeholder="Enter city">
+    </div>
+    <div class="form-group">
       <label>Password</label>
       <input v-model="password" type="password" class="form-control" placeholder="Password">
       <small class="form-text text-muted" v-show="passwordValidationMsg">{{ passwordValidationMsg }}</small>
@@ -37,7 +41,8 @@ export default {
       login: null,
       email: null,
       password: null,
-      confirmPassword: null
+      confirmPassword: null,
+      city: null
     }
   },
   computed: {
@@ -77,7 +82,7 @@ export default {
   methods: {
     async register () {
       if (!this.validate()) {
-        // TODO signal that it's trash
+        this.flash('Fill the form correctly', 'error')
         return
       }
       const rsp = await this.$store.dispatch('register', {
@@ -85,6 +90,11 @@ export default {
         email: this.email,
         password: this.password
       })
+      if (!rsp.result) {
+        this.flash(rsp.message, 'error')
+      } else {
+        this.flash('Registration has been successful', 'success')
+      }
       console.log(rsp)
     },
     validate () {
