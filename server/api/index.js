@@ -20,7 +20,8 @@ Router.post('/user/register', async (req, res) => {
     const user = new User({
       login: req.body.login,
       password: req.body.password,
-      email: req.body.email
+      email: req.body.email,
+      city: req.body.city
     })
     await user.save()
     res.json({ result: 1 })
@@ -46,9 +47,25 @@ Router.post('/user/logout', (req, res, next) => {
   })
 })
 
-Router.get('/user/:id', checkAuth, (req, res) => {
-  console.log(req.body)
-  res.end()
+Router.get('/user/:id', async (req, res) => {
+  const profile = await User.findById(req.params.id)
+  res.json(profile)
+})
+
+Router.put('/user/:id', async (req, res) => {
+  const $set = {
+    city: req.body.city,
+    email: req.body.email
+  }
+  if (req.body.password) {
+    $set.password = req.body.password
+  }
+  const upd = await User.update({ _id: req.params.id }, { $set })
+  if (!upd) {
+    res.end(400)
+  } else {
+    res.json({ result: 1 })
+  }
 })
 
 Router.put('/exercises', (req, res) => {

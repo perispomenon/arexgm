@@ -7,11 +7,13 @@ Vue.use(Vuex)
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const STATS = 'STATS'
+const PROFILE = 'PROFILE'
 
 export default new Vuex.Store({
   state: {
     user: null,
-    stat: []
+    profile: null,
+    stats: []
   },
   mutations: {
     [LOGIN] (state, u) {
@@ -22,6 +24,9 @@ export default new Vuex.Store({
     },
     [STATS] (state, s) {
       state.stats = s
+    },
+    [PROFILE] (state, p) {
+      state.profile = p
     }
   },
   actions: {
@@ -34,7 +39,8 @@ export default new Vuex.Store({
       commit(LOGIN, {
         login: data.login,
         email: data.email,
-        id: data._id
+        id: data._id,
+        city: data.city
       })
     },
     async logOut ({ commit, state }) {
@@ -48,6 +54,13 @@ export default new Vuex.Store({
     async getStats ({ commit, state }, input) {
       const { data } = await axios.get('/api/exercises', input)
       commit(STATS, data)
+    },
+    async getUserProfile ({ commit, state }, id) {
+      const { data } = await axios.get(`/api/user/${id}`)
+      commit(PROFILE, data)
+    },
+    async saveUserProfile ({ commit, state }, input) {
+      await axios.put(`/api/user/${input.id}`, input.data)
     }
   }
 })

@@ -22,6 +22,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// todo make sessions work
 app.use(session( { secret: '123dog', resave: true, saveUninitialized: true } ))
 app.use(passport.initialize())
 app.use(passport.session())
