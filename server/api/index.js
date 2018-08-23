@@ -33,7 +33,10 @@ Router.post('/user/login', (req, res, next) => {
     if (err || !user) {
       res.json(info)
     } else {
-      res.json(user)
+      req.logIn(user, err => {
+        if (err) next(err)
+        res.json(user)
+      })
     }
   })(req, res, next)
 })
@@ -43,6 +46,7 @@ Router.post('/user/logout', (req, res, next) => {
     if (err) {
       next(err)
     }
+    req.logout()
     res.end()
   })
 })
@@ -70,6 +74,9 @@ Router.put('/user/:id', async (req, res) => {
 
 Router.put('/exercises', (req, res) => {
   console.log(req.body)
+  const stat = new Stat({
+    
+  })
   res.end()
 })
 

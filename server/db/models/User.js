@@ -6,6 +6,6 @@ const UserSchema = new mongoose.Schema({
   email: String,
   id: mongoose.Schema.Types.ObjectId,
   city: String
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('User', UserSchema)

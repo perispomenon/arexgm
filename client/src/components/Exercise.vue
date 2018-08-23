@@ -23,7 +23,8 @@ export default {
       firstOperand: null,
       secondOperand: null,
       answer: null,
-      userAnswer: null
+      userAnswer: null,
+      timeTaken: null
     }
   },
   methods: {
@@ -50,13 +51,16 @@ export default {
           break
       }
 
+      this.timeTaken = Date.now()
       return prevEx
     },
     checkAnswer () {
       if (!this.userAnswer && this.userAnswer !== 0) {
         return
       }
-      this.$emit('answerChecked', Number(this.userAnswer) === this.answer)
+      // TODO i'm really not in the mood to do this crap
+      this.$emit('answerChecked', { isCorrect: Number(this.userAnswer) === this.answer, timeTaken: Date.now - this.timeTaken })
+      this.timeTaken = null
       this.userAnswer = null
     }
   },

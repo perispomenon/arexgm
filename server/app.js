@@ -23,16 +23,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // todo make sessions work
-app.use(session( { secret: '123dog', resave: true, saveUninitialized: true } ))
+app.use(session( { secret: '123dog', resave: true, saveUninitialized: true, cookie: { maxAge: 360000 }  } ))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(function (req, res, next) {
+/*app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
-});
+});*/
+
 
 app.use('/api', apiRouter)
 

@@ -36,27 +36,28 @@ export default {
       gameTimeProgress: 0,
       gameTimeInterval: null,
       isAnswerCorrect: null,
-      showVerdict: false
+      showVerdict: false,
+      gameStartTime: null
     }
   },
   methods: {
     startGame () {
       this.gameStarted = true
       this.$refs.exercise.generateNext()
-      const gameStartTime = moment()
+      this.gameStartTime = moment()
       const gameEndTime = gameStartTime.clone().add(this.roundLength, 'minutes')
       setTimeout(this.endGame, gameEndTime.diff(gameStartTime))
       this.gameTimeInterval = setInterval(() => {
         // TODO devise the alg of time progress
       }, 200)
     },
-    answerChecked (isCorrect) {
-      this.isAnswerCorrect = isCorrect
+    answerChecked (obj) {
+      this.isAnswerCorrect = obj.isCorrect
       this.showVerdict = true
       // TODO maybe do animation on the verdict
-      if (isCorrect) {
+      if (obj.isCorrect) {
         // TODO add problem solving time to this array
-        this.exercises.push(this.$refs.exercise.generateNext())
+        this.exercises.push({ content: this.$refs.exercise.generateNext(), solvingTime: obj.timeTaken })
       }
       console.log(this.exercises)
     },
@@ -65,7 +66,11 @@ export default {
       this.showVerdict = false
       this.gameTimeProgress = 0
       clearInterval(this.gameTimeInterval)
-      const rsp = await this.$store.dispatch('storeStats', this.exercises)
+      const data = {
+        time: gameStartTime ? gameStartTime.format('LLLL') : null,
+        exercises: this.exercises
+      }
+      const rsp = await this.$store.dispatch('storeStats', data)
       console.log(rsp)
     }
   },
