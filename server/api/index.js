@@ -2,6 +2,7 @@ const Router = require('express').Router()
 const User = require('../db/models/User')
 const Stat = require('../db/models/Stat')
 const passport = require('passport')
+const moment = require('moment')
 
 function checkAuth () {
   return function (req, res, next) {
@@ -46,17 +47,17 @@ Router.post('/user/logout', (req, res, next) => {
     if (err) {
       next(err)
     }
-    req.logout()
+    req.logOut()
     res.end()
   })
 })
 
-Router.get('/user/:id', async (req, res) => {
-  const profile = await User.findById(req.params.id)
+Router.get('/user', async (req, res) => {
+  const profile = await User.findById(req.user._id)
   res.json(profile)
 })
 
-Router.put('/user/:id', async (req, res) => {
+Router.put('/user', async (req, res) => {
   const $set = {
     city: req.body.city,
     email: req.body.email
@@ -64,7 +65,7 @@ Router.put('/user/:id', async (req, res) => {
   if (req.body.password) {
     $set.password = req.body.password
   }
-  const upd = await User.update({ _id: req.params.id }, { $set })
+  const upd = await User.update({ _id: req.user._id}, { $set })
   if (!upd) {
     res.end(400)
   } else {
@@ -72,17 +73,24 @@ Router.put('/user/:id', async (req, res) => {
   }
 })
 
-Router.put('/exercises', (req, res) => {
-  console.log(req.body)
+Router.put('/exercises', async (req, res) => {
   const stat = new Stat({
-    
+    userId: req.user._id,
+    time: req.body.time,
+    exercises: req.body.exercises
   })
+  await stat.save()
   res.end()
 })
 
-Router.get('/exercises', (req, res) => {
-  console.log(req.body)
-  res.end()
+Router.get('/exercises', async (req, res) => {
+  const stats = await Stat.where({ userId: req.user._id }).find()
+  stats.map(s => {
+    s.time = moment(s.time).format('LLLL')
+    console.log(s.time)
+    return s
+  })
+  res.json(stats)
 })
 
 module.exports = Router

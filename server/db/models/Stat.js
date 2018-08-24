@@ -3,12 +3,10 @@ const mongoose = require('mongoose')
 const StatSchema = new mongoose.Schema({
   userId: String,
   id: mongoose.Schema.Types.ObjectId,
-  history: [{
-    time: Date,
-    exercises: [{
-      content: String,
-      solvingTime: Number // in seconds
-    }]
+  time: Date,
+  exercises: [{
+    content: String,
+    solvingTime: Number // in seconds
   }]
 }, { timestamps: true })
 

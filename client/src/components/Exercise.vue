@@ -13,6 +13,7 @@
 
 <script>
 import randoms from '@/mixins/randoms'
+import moment from 'moment'
 
 export default {
   name: 'exercise',
@@ -51,16 +52,20 @@ export default {
           break
       }
 
-      this.timeTaken = Date.now()
+      this.timeTaken = moment()
       return prevEx
     },
     checkAnswer () {
       if (!this.userAnswer && this.userAnswer !== 0) {
         return
       }
-      // TODO i'm really not in the mood to do this crap
-      this.$emit('answerChecked', { isCorrect: Number(this.userAnswer) === this.answer, timeTaken: Date.now - this.timeTaken })
-      this.timeTaken = null
+      const isCorrect = Number(this.userAnswer) === this.answer
+      let time = null
+      if (isCorrect) {
+        time = moment().diff(this.timeTaken, 'seconds')
+        this.timeTaken = null
+      }
+      this.$emit('answerChecked', { isCorrect, timeTaken: time })
       this.userAnswer = null
     }
   },

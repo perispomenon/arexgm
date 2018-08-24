@@ -45,7 +45,7 @@
             <div class="card-body">
               <ul class="list-group">
                 <li class="list-group-item" v-for="(exercise, otherIndex) in stat.exercises" :key="otherIndex">
-                  {{ exercise.exercise }} | {{ exercise.time }}
+                  {{ exercise.content }} | {{ exercise.solvingTime + ' s' }}
                 </li>
               </ul>
             </div>
@@ -85,7 +85,6 @@ export default {
         return
       }
       const data = {
-        id: this.user.id,
         data: {
           login: this.login,
           email: this.email,
@@ -99,7 +98,8 @@ export default {
     }
   },
   async mounted () {
-    await this.$store.dispatch('getUserProfile', this.user.id)
+    await this.$store.dispatch('getUserProfile')
+    await this.$store.dispatch('getStats')
     this.login = this.profile.login
     this.city = this.profile.city
     this.email = this.profile.email

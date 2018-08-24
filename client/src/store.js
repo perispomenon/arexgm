@@ -54,13 +54,14 @@ export default new Vuex.Store({
     async getStats ({ commit, state }, input) {
       const { data } = await axios.get('/api/exercises', input)
       commit(STATS, data)
+      console.log(data)
     },
-    async getUserProfile ({ commit, state }, id) {
-      const { data } = await axios.get(`/api/user/${id}`)
+    async getUserProfile ({ commit, state }) {
+      const { data } = await axios.get(`/api/user`)
       commit(PROFILE, data)
     },
     async saveUserProfile ({ commit, state }, input) {
-      await axios.put(`/api/user/${input.id}`, input.data)
+      await axios.put(`/api/user`, input.data)
     }
   }
 })
